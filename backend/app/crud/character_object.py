@@ -1,8 +1,8 @@
 from sqlalchemy.orm import Session
-from backend.app.models.character_object import CharacterObject
-from backend.app.models.character import Character
-from backend.app.models.object import Object
-from backend.app.schemas.character_object import *
+from app.models.character_object import CharacterObject
+from app.models.character import Character
+from app.models.object import Object
+from app.schemas.character_object import *
 
 
 def get_character_object(session: Session, id_character: int, id_object: int):
@@ -18,7 +18,11 @@ def get_characters_for_object(session: Session, id_object: int):
 
 
 def create_character_object(session: Session, character_object: CharacterObjectCreate):
-    character_object_add = CharacterObject(character_object.id_character, character_object.id_object, character_object.quantity)
+    character_object_add = CharacterObject(
+        id_character=character_object.id_character,
+        id_object=character_object.id_object,
+        quantity=character_object.quantity
+    )
     session.add(character_object_add)
     session.commit()
     session.refresh(character_object_add)

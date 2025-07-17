@@ -1,8 +1,8 @@
 from sqlalchemy.orm import Session
-from backend.app.models.user_campaign import UserCampaign
-from backend.app.models.campaign import Campaign
-from backend.app.models.user import User
-from backend.app.schemas.user_campaign import *
+from app.models.user_campaign import UserCampaign
+from app.models.campaign import Campaign
+from app.models.user import User
+from app.schemas.user_campaign import *
 
 
 def get_user_campaign(session: Session, id_campaign: int, id_user: int):
@@ -18,7 +18,10 @@ def get_campaigns_of_user(session: Session, id_user: int):
 
 
 def create_user_campaign(session: Session, user_campaign: UserCampaignCreate):
-    user_campaign_add = UserCampaign(user_campaign.id_campaign, user_campaign.id_users)
+    user_campaign_add = UserCampaign(
+        id_campaign=user_campaign.id_campaign,
+        id_user=user_campaign.id_user
+    )
     session.add(user_campaign_add)
     session.commit()
     session.refresh(user_campaign_add)

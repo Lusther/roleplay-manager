@@ -1,8 +1,8 @@
 from sqlalchemy.orm import Session
-from backend.app.models.token import Token
-from backend.app.models.map import Map
-from backend.app.models.character import Character
-from backend.app.schemas.token import *
+from app.models.token import Token
+from app.models.map import Map
+from app.models.character import Character
+from app.schemas.token import *
 
 
 def get_token(session: Session, id_map: int, id_character: int):
@@ -14,7 +14,12 @@ def get_tokens_on_map(session: Session, id_map: int):
 
 
 def create_token(session: Session, token: TokenCreate):
-    token_add = Token(token.id_map, token.id_character, token.pos_x, token.pos_y)
+    token_add = Token(
+        id_map=token.id_map,
+        id_character=token.id_character,
+        pos_x=token.pos_x,
+        pos_y=token.pos_y
+    )
     session.add(token_add)
     session.commit()
     session.refresh(token_add)

@@ -1,8 +1,8 @@
 from sqlalchemy.orm import Session
-from backend.app.models.classe_statistic import ClasseStatistic
-from backend.app.models.classe import Classe
-from backend.app.models.statistic import Statistic
-from backend.app.schemas.classe_statistic import *
+from app.models.classe_statistic import ClasseStatistic
+from app.models.classe import Classe
+from app.models.statistic import Statistic
+from app.schemas.classe_statistic import *
 
 
 def get_classe_statistic(session: Session, id_classe: int, id_statistic: int):
@@ -14,7 +14,11 @@ def get_statistic_of_classe(session: Session, id_classe: int):
 
 
 def create_classe_statistic(session: Session, classe_statistic: ClasseStatisticCreate):
-    classe_statistic_add = ClasseStatistic(classe_statistic.id_classe, classe_statistic.id_statistic, classe_statistic.bonus)
+    classe_statistic_add = ClasseStatistic(
+        id_classe=classe_statistic.id_classe,
+        id_statistic=classe_statistic.id_statistic,
+        bonus=classe_statistic.bonus
+    )
     session.add(classe_statistic_add)
     session.commit()
     session.refresh(classe_statistic_add)

@@ -13,4 +13,4 @@ class ClasseStatisticCreate(ClasseStatisticBase):
 
 class ClasseStatisticRead(ClasseStatisticBase):
     class Config:
-        orm_mode = True
+        from_attributes = True

@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
-from backend.app.models.user import User
-from backend.app.schemas.user import *
+from app.models.user import User
+from app.schemas.user import *
 
 
 def get_user(session: Session, id_user: int):
@@ -8,11 +8,16 @@ def get_user(session: Session, id_user: int):
 
 
 def get_users(session: Session):
+    print("Toto2")
     return session.query(User).all()
 
 
 def create_user(session: Session, user: UserCreate):
-    user_add = User(user.name, user.password, user.is_admin)
+    user_add = User(
+        name=user.name,
+        password=user.password,
+        is_admin=user.is_admin
+    )
     session.add(user_add)
     session.commit()
     session.refresh(user_add)

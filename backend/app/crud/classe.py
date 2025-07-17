@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
-from backend.app.models.classe import Classe
-from backend.app.schemas.classe import *
+from app.models.classe import Classe
+from app.schemas.classe import *
 
 
 def get_classe(session: Session, id_classe: int):
@@ -12,7 +12,12 @@ def get_classes(session: Session):
 
 
 def create_classe(session: Session, classe: ClasseCreate):
-    classe_add = Classe(classe.id_campaign, classe.name, classe.bio, classe.image_path)
+    classe_add = Classe(
+        id_campaign=classe.id_campaign,
+        name=classe.name,
+        bio=classe.bio,
+        image_path=classe.image_path
+    )
     session.add(classe_add)
     session.commit()
     session.refresh(classe_add)

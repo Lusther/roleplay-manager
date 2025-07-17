@@ -14,4 +14,4 @@ class TokenCreate(TokenBase):
 
 class TokenRead(TokenBase):
     class Config:
-        orm_mode = True
+        from_attributes = True

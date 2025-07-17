@@ -1,21 +1,13 @@
-from database import Base, engine
-import models.campaign
-import models.user
-import models.user_campaign
-import models.character
-import models.classe
-import models.map
-import models.object
-import models.statistic
-import models.token
-import models.character_object
-import models.character_statistic
-import models.classe_statistic
+from app.database import Base, engine
 from fastapi import FastAPI
+from app.routes import user
 
 Base.metadata.create_all(bind=engine)
 
+print("Ok")
+
 app = FastAPI()
+app.include_router(user.router)
 
 @app.get("/")
 def read_root():

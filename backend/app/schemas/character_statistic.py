@@ -13,4 +13,4 @@ class CharacterStatisticCreate(CharacterStatisticBase):
 
 class CharacterStatisticRead(CharacterStatisticBase):
     class Config:
-        orm_mode = True
+        from_attributes = True

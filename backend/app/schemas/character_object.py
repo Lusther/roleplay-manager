@@ -13,4 +13,4 @@ class CharacterObjectCreate(CharacterObjectBase):
 
 class CharacterObjectRead(CharacterObjectBase):
     class Config:
-        orm_mode = True
+        from_attributes = True
