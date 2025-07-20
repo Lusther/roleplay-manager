@@ -28,4 +28,13 @@ def get_users_in_campaign(session: Session, campaign: Campaign):
 def delete_campaign(session: Session, campaign: Campaign):
     session.delete(campaign)
     session.commit()
+
+
+def update_campaign(session: Session, campaign: Campaign, up_campaign: Campaign):
+    campaign.name = up_campaign.name
+    campaign.id_master = up_campaign.id_master
+    session.add(campaign)
+    session.commit()
+    session.refresh(campaign)
+    return campaign
     

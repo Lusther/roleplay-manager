@@ -41,6 +41,7 @@ def read_user(user: UserPublic = Depends(get_existing_user)):
     return user
 
 
+# Add user to campaign
 @router.post("/{id_user}/join_campaign/{id_campaign}")
 def join_campaign(id_user: int, id_campaign: int, session: SessionDep):
     user = get_existing_user(id_user, session)
@@ -52,13 +53,22 @@ def join_campaign(id_user: int, id_campaign: int, session: SessionDep):
         raise HTTPException(status_code=409, detail="This user is already in this campaign.")
 
 
+# Get the campaigns to which the user participates
 @router.post("/{id_user}/campaigns")
 def read_campaigns_for_user(id_user: int, session: SessionDep):
     user = get_existing_user(id_user, session)
     return get_campaigns_for_user(session, user)
 
 
+# Remove the user
 @router.delete("/{id_user}")
 def remove_user(id_user: int, session: SessionDep):
     user = get_existing_user(id_user, session)
     delete_user(session, user)
+
+
+# Update the user
+@router.put("/{id_user}")
+def put_user(id_user: int, up_user: UserCreate, session: SessionDep):
+    user = get_existing_user(id_user, session)
+    update_user(session, user, up_user)

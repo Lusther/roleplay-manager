@@ -44,3 +44,13 @@ def delete_user(session: Session, user: User):
     session.delete(user)
     session.commit()
 
+
+def update_user(session: Session, user: User, up_user: User):
+    user.name = up_user.name
+    user.password = up_user.password
+    user.is_admin = up_user.is_admin
+    session.add(user)
+    session.commit()
+    session.refresh(user)
+    return user
+

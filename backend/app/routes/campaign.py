@@ -48,3 +48,10 @@ def read_users_in_campaign(id_campaign: int, session: SessionDep):
 def remove_campaign(id_campaign: int, session: SessionDep):
     campaign = get_existing_campaign(id_campaign, session)
     delete_campaign(session, campaign)
+
+
+# Update the campaign
+@router.put("/{id_campaign}")
+def put_user(id_campaign: int, up_campaign: CampaignCreate, session: SessionDep):
+    user = get_existing_campaign(id_campaign, session)
+    update_campaign(session, user, up_campaign)
